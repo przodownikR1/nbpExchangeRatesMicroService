@@ -23,7 +23,7 @@ import com.google.common.io.CharStreams;
 @Slf4j
 public class FileContentLoader {
     public void customLoad(@Body InputStream inputStream, @Headers Map<String, Object> header) throws IOException {
-        log.info("+++          customLoad  {}", header);
+        log.debug("+++          customLoad  {}", header);
         String text = null;
         try (final Reader reader = new InputStreamReader(inputStream)) {
             text = CharStreams.toString(reader);
