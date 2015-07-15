@@ -11,7 +11,7 @@ public class HttpRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         RecipientListBean rl = new RecipientListBean("file://outbox?fileName=${date:now:yyyyMMddHHmmss}.xml", "stream:out");
-        from("timer://nbp?fixedRate=true&delay=0&period=5000")
+        from("timer://nbp?fixedRate=true&delay=0&period=1800000")
         .to("http://www.nbp.pl/kursy/xml/LastA.xml")
         .convertBodyTo(String.class).recipientList(method(rl, "route"));
         
