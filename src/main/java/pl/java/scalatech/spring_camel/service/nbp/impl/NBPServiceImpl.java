@@ -6,16 +6,19 @@ import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.camel.Handler;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pl.java.scalatech.spring_camel.exception.Exceptions;
 import pl.java.scalatech.spring_camel.nbp.Pozycja;
 import pl.java.scalatech.spring_camel.nbp.Tabela_kursow;
 import pl.java.scalatech.spring_camel.service.nbp.NBPService;
 
-@Component
+@Service("nbpService")
+@Transactional(readOnly = true)
 @Slf4j
 public class NBPServiceImpl implements NBPService {
 
@@ -27,6 +30,7 @@ public class NBPServiceImpl implements NBPService {
     }
 
     @Override
+    @Handler
     public void setToDateExchangeRates(Tabela_kursow tk) {
         this.toDayExchangeRate = tk;
 
